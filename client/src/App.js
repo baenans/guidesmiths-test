@@ -9,25 +9,40 @@ const App = () => {
   const state = useSelector((state) => state.phones);
   const dispatch = useDispatch();
 
-  const fetchData = () => {
-    // TODO: baenans@ replace with real API call
-    dispatch(phonesActions.setPhones(phonesData));
-  };
   useEffect(() => {
     fetchData();
     // eslint-disable-next-line
   }, []);
+
+  const fetchData = () => {
+    // TODO: baenans@ replace with real API call
+    dispatch(phonesActions.setPhones(phonesData));
+  };
+
+  const selectPhone = (phone) => {
+    dispatch(phonesActions.selectPhone(phone));
+  };
+
+  const dismissSelectedPhone = () => {
+    dispatch(phonesActions.dismissSelectedPhone());
+  };
 
   return (
     <div>
       <ul>
         {state.loading && <Spinner size={7} />}
         {state.phones.map((phone) => (
-          <li key={`phone-list-${phone.id}`}>
+          <li key={`phone-list-${phone.id}`} onClick={() => selectPhone(phone)}>
             {phone.manufacturer} {phone.name}
           </li>
         ))}
       </ul>
+      {state.selectedPhone && (
+        <div>
+          <p>{state.selectedPhone.name}</p>
+          <button onClick={() => dismissSelectedPhone()}>Dismiss</button>
+        </div>
+      )}
     </div>
   );
 };
