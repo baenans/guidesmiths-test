@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { phonesActions } from './actions/index';
 
-import { Spinner } from './components/Spinner';
+import { Header, Container, Sider, Panel } from './components/layout';
+import { Spinner } from './components/ui';
 const phonesData = require('./data/phones.json');
 
 const App = () => {
@@ -28,21 +29,34 @@ const App = () => {
   };
 
   return (
-    <div>
-      <ul>
-        {state.loading && <Spinner size={7} />}
-        {state.phones.map((phone) => (
-          <li key={`phone-list-${phone.id}`} onClick={() => selectPhone(phone)}>
-            {phone.manufacturer} {phone.name}
-          </li>
-        ))}
-      </ul>
-      {state.selectedPhone && (
-        <div>
-          <p>{state.selectedPhone.name}</p>
-          <button onClick={() => dismissSelectedPhone()}>Dismiss</button>
-        </div>
-      )}
+    <div className="App">
+      <Header title="The Phones App" />
+      <Container>
+        <Sider>
+          {state.loading && <Spinner size={7} />}
+          <ul>
+            {state.phones.map((phone) => (
+              <li
+                key={`phone-list-${phone.id}`}
+                onClick={() => selectPhone(phone)}
+              >
+                {phone.manufacturer} {phone.name}
+              </li>
+            ))}
+          </ul>
+        </Sider>
+        <Panel
+          active={state.selectedPhone}
+          onClose={() => dismissSelectedPhone()}
+        >
+          {state.selectedPhone && (
+            <div>
+              <p>{state.selectedPhone.name}</p>
+              <button onClick={() => dismissSelectedPhone()}>Dismiss</button>
+            </div>
+          )}
+        </Panel>
+      </Container>
     </div>
   );
 };

@@ -1,0 +1,27 @@
+.Sider {
+  margin: 0;
+  width: 380px;
+  min-width: 320px;
+  max-height: 87vh;
+  box-sizing: border-box;
+  overflow-y: scroll;
+  border-right: 1px dashed var(--divider, rgba(200, 200, 200, 1));
+  scrollbar-width: none;
+}
+
+.Sider::-webkit-scrollbar {
+  display: none;
+}
+
+
+@media screen and (max-width: 700px) {
+  .Sider {
+    min-width: 100vw;
+    max-height: unset;
+    scrollbar-width: thin;
+  }
+
+  .Sider::-webkit-scrollbar {
+    display: unset;
+  }
+}
