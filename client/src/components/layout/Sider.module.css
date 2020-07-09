@@ -18,6 +18,7 @@
   .Sider {
     min-width: 100vw;
     max-height: unset;
+    border-right: unset;
     scrollbar-width: thin;
   }
 
