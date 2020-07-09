@@ -21,8 +21,4 @@
     border-right: unset;
     scrollbar-width: thin;
   }
-
-  .Sider::-webkit-scrollbar {
-    display: unset;
-  }
 }
