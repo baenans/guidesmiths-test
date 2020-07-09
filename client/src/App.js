@@ -4,6 +4,8 @@ import { phonesActions } from './actions/index';
 
 import { Header, Container, Sider, Panel } from './components/layout';
 import { Spinner } from './components/ui';
+import { PhoneList } from './components/phone';
+
 const phonesData = require('./data/phones.json');
 
 const App = () => {
@@ -34,16 +36,10 @@ const App = () => {
       <Container>
         <Sider>
           {state.loading && <Spinner size={7} />}
-          <ul>
-            {state.phones.map((phone) => (
-              <li
-                key={`phone-list-${phone.id}`}
-                onClick={() => selectPhone(phone)}
-              >
-                {phone.manufacturer} {phone.name}
-              </li>
-            ))}
-          </ul>
+          <PhoneList
+            phones={state.phones}
+            onPhoneSelected={(phone) => selectPhone(phone)}
+          />
         </Sider>
         <Panel
           active={state.selectedPhone}
