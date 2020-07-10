@@ -1,12 +1,20 @@
-FROM node:alpine
+FROM node:alpine as builder
 
-# fbaena@: React scrips has some issues with live reloading
-# check out [this](https://github.com/facebook/create-react-app/issues/8688)
-ENV CI=true
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
 
-WORKDIR /app
-COPY package.json ./
-RUN npm install --silent
-COPY ./ ./
+COPY package.json /usr/src/app
+RUN npm install --production=true
 
-CMD ["npm", "start"]
+COPY . /usr/src/app
+RUN npm run build
+
+FROM nginx
+
+RUN rm /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/nginx.conf
+
+COPY --from=builder /usr/src/app/build /usr/share/nginx/html
+RUN chown nginx.nginx /usr/share/nginx/html -R
+
+EXPOSE 80

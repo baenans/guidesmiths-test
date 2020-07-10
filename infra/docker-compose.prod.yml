@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  server-prod:
+    build:
+      context: ../server
+      dockerfile: Dockerfile
+    ports:
+      - 4000:4000
+    command: npm run start
+    restart: always
+  client-prod:
+    build:
+      context: ../client
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+      - 443:443
+    links:
+      - server-prod
+    restart: always

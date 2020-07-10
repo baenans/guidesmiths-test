@@ -4,7 +4,7 @@ services:
   server:
     build:
       context: ../server
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     expose:
       - 4000
     ports:
@@ -17,7 +17,7 @@ services:
   client:
     build:
       context: ../client
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     expose:
       - 3000
     ports:
