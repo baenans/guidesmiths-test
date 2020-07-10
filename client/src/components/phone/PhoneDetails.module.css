@@ -1,0 +1,29 @@
+.PhoneDetails {
+  display: flex;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+.description {
+  flex: 1 1;
+  padding: 1em 3em;
+}
+
+.image {
+  flex: 1 1;
+  background-color: white;
+  background-repeat: no-repeat;
+  background-size: 300px auto;
+  background-position: center;
+}
+
+@media screen and (max-width: 860px) {
+  .PhoneDetails {
+    flex-direction: column;
+  }
+
+  .image {
+    min-height: 200px;
+    background-size: auto 200px;
+  }
+}

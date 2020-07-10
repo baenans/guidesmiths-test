@@ -4,7 +4,7 @@ import { phonesActions } from './actions/index';
 
 import { Header, Container, Sider, Panel } from './components/layout';
 import { Spinner } from './components/ui';
-import { PhoneList } from './components/phone';
+import { PhoneList, PhoneDetails } from './components/phone';
 
 const phonesData = require('./data/phones.json');
 
@@ -45,11 +45,9 @@ const App = () => {
           active={state.selectedPhone}
           onClose={() => dismissSelectedPhone()}
         >
-          {state.selectedPhone && (
-            <div>
-              <p>{state.selectedPhone.name}</p>
-              <button onClick={() => dismissSelectedPhone()}>Dismiss</button>
-            </div>
+          {state.selectedPhone && <PhoneDetails phone={state.selectedPhone} />}
+          {!state.selectedPhone && (
+            <p>Select a phone to see detailed information</p>
           )}
         </Panel>
       </Container>
