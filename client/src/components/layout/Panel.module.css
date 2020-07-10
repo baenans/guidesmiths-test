@@ -12,6 +12,7 @@
 
 .actions {
   display: none;
+  box-sizing: border-box;
   height: 36px;
   background-color: white;
   border-bottom: 1px solid var(--divider, rgba(200, 200, 200, 1));

@@ -3,7 +3,6 @@ import styles from './PhoneDetails.module.css';
 import { getFilesUri } from '../../utils';
 
 const PhoneDetails = ({ phone }) => {
-  console.log(phone);
   return (
     <>
       <div className={styles.PhoneDetails}>
