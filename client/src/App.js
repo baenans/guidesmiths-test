@@ -2,11 +2,10 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { phonesActions } from './actions/index';
 
+import { api } from './api';
 import { Header, Container, Sider, Panel } from './components/layout';
 import { Spinner } from './components/ui';
 import { PhoneList, PhoneDetails } from './components/phone';
-
-const phonesData = require('./data/phones.json');
 
 const App = () => {
   const state = useSelector((state) => state.phones);
@@ -17,9 +16,13 @@ const App = () => {
     // eslint-disable-next-line
   }, []);
 
-  const fetchData = () => {
-    // TODO: baenans@ replace with real API call
-    dispatch(phonesActions.setPhones(phonesData));
+  const fetchData = async () => {
+    try {
+      const phonesData = await api.phones.list();
+      dispatch(phonesActions.setPhones(phonesData));
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const selectPhone = (phone) => {
